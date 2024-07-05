@@ -1,7 +1,6 @@
 import { CardActionArea, CardActions } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from "react";
 import './quote.css';
@@ -10,18 +9,7 @@ const url="https://inspo-quotes-api.herokuapp.com/quotes/random";
 export default function Quote(){
     const [quote,setQuote]=useState({text:"",author:""});
     const [isloading,setisloading]=useState(true);
-    const [imageUrl, setImageUrl] = useState('');
-    const [openQuotes,setOpenQuotes] = useState(false);
-    const spaceImages = [
-        
-        '../src/assets/images/4.jpg',
-        '../src/assets/images/5.jpg',
-        '../src/assets/images/6.jpg',
-        '../src/assets/images/7.jpg',
-        '../src/assets/images/8.jpg',
-        '../src/assets/images/9.png',
-        '../src/assets/images/10.jpg',
-    ];
+   
 
 
     useEffect(()=>{
@@ -31,23 +19,18 @@ export default function Quote(){
             const quotee = jsonrespone.quote;
           setQuote(quotee);
           setisloading(false);
-          const randomImageUrl = getRandomImage();
-          setImageUrl(randomImageUrl);
+         
           }
         GetQuote();
     },[])
-    const getRandomImage = () => {
-        const randomIndex = Math.floor(Math.random() * spaceImages.length);
-        return spaceImages[randomIndex];
-    };
+    
     
     async function GetQuote(){
       const response = await fetch(url);
       const jsonrespone = await response.json();
       const quotee = jsonrespone.quote;
       setQuote(quotee);
-      const randomImageUrl = getRandomImage();
-      setImageUrl(randomImageUrl);
+     
      
     }
     const quoteList =[]
@@ -67,12 +50,7 @@ export default function Quote(){
     
     {!isloading && (<Card sx={{ maxWidth: 345 }} className='CardComponent'>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height="150"
-          image={imageUrl}
-          alt="green iguana"
-        />
+       
         <CardContent>
         
           <Typography gutterBottom variant="h5" component="div">
